@@ -1,0 +1,321 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  DISPATCHER
+  MANAGER
+  VIEWER
+}
+
+enum VehicleState {
+  MOVING
+  IDLE
+  STOPPED
+  ONLINE
+  OFFLINE
+}
+
+enum AlertSeverity {
+  INFO
+  WARNING
+  CRITICAL
+}
+
+enum AlertStatus {
+  OPEN
+  ACKNOWLEDGED
+  RESOLVED
+}
+
+enum TaskStatus {
+  NEW
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum MaintenanceStatus {
+  UPCOMING
+  DUE
+  OVERDUE
+  COMPLETED
+}
+
+enum CommandStatus {
+  PENDING
+  SENT
+  ACKNOWLEDGED
+  FAILED
+  CANCELLED
+}
+
+model Organization {
+  id String @id @default(cuid())
+  name String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users User[]
+  vehicles Vehicle[]
+  drivers Driver[]
+  geofences Geofence[]
+  alerts Alert[]
+  tasks Task[]
+  auditLogs AuditLog[]
+  commands DeviceCommand[]
+  cameraMedia CameraMedia[]
+  configurationOptions ConfigurationOption[]
+}
+
+model User {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields:[organizationId],references:[id],onDelete:Cascade)
+  name String
+  email String @unique
+  passwordHash String
+  role Role @default(VIEWER)
+  active Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  refreshTokens RefreshToken[]
+  auditLogs AuditLog[]
+}
+
+model RefreshToken {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+  tokenHash String
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime @default(now())
+  @@index([userId,expiresAt])
+}
+
+model Vehicle {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields:[organizationId],references:[id],onDelete:Cascade)
+  driverId String?
+  driver Driver? @relation(fields:[driverId],references:[id],onDelete:SetNull)
+  name String
+  plateNumber String
+  vin String? @unique
+  group String?
+  make String?
+  model String?
+  year Int?
+  color String?
+  state VehicleState @default(OFFLINE)
+  speed Float @default(0)
+  heading Float @default(0)
+  latitude Float?
+  longitude Float?
+  altitude Float?
+  fuelLevel Float?
+  odometer Float @default(0)
+  engineHours Float @default(0)
+  engineOn Boolean @default(false)
+  lastSeenAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  positions Position[]
+  alerts Alert[]
+  maintenance MaintenanceRecord[]
+  fuelRecords FuelRecord[]
+  tasks Task[]
+  commands DeviceCommand[]
+  cameraMedia CameraMedia[]
+  @@unique([organizationId,plateNumber])
+  @@index([organizationId,state])
+  @@index([latitude,longitude])
+}
+
+model Driver {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields:[organizationId],references:[id],onDelete:Cascade)
+  name String
+  phone String?
+  email String?
+  licenseNumber String
+  licenseExpiresAt DateTime?
+  active Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  vehicles Vehicle[]
+  @@unique([organizationId,licenseNumber])
+}
+
+model Position {
+  id BigInt @id @default(autoincrement())
+  vehicleId String
+  vehicle Vehicle @relation(fields:[vehicleId],references:[id],onDelete:Cascade)
+  latitude Float
+  longitude Float
+  speed Float @default(0)
+  heading Float @default(0)
+  altitude Float?
+  ignition Boolean @default(false)
+  accuracy Float?
+  recordedAt DateTime
+  receivedAt DateTime @default(now())
+  raw Json?
+  @@index([vehicleId,recordedAt(sort: Desc)])
+}
+
+model Geofence {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields:[organizationId],references:[id],onDelete:Cascade)
+  name String
+  type String
+  geometry Json
+  color String @default("#28e1da")
+  active Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Alert {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields:[organizationId],references:[id],onDelete:Cascade)
+  vehicleId String?
+  vehicle Vehicle? @relation(fields:[vehicleId],references:[id],onDelete:SetNull)
+  type String
+  title String
+  message String
+  severity AlertSeverity @default(INFO)
+  status AlertStatus @default(OPEN)
+  metadata Json?
+  occurredAt DateTime @default(now())
+  acknowledgedAt DateTime?
+  resolvedAt DateTime?
+  @@index([organizationId,status,occurredAt(sort: Desc)])
+}
+
+model MaintenanceRecord {
+  id String @id @default(cuid())
+  vehicleId String
+  vehicle Vehicle @relation(fields:[vehicleId],references:[id],onDelete:Cascade)
+  name String
+  description String?
+  status MaintenanceStatus @default(UPCOMING)
+  intervalKm Float?
+  intervalHours Float?
+  dueAt DateTime?
+  dueOdometer Float?
+  completedAt DateTime?
+  cost Decimal? @db.Decimal(12,2)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FuelRecord {
+  id String @id @default(cuid())
+  vehicleId String
+  vehicle Vehicle @relation(fields:[vehicleId],references:[id],onDelete:Cascade)
+  liters Float
+  pricePerLiter Decimal? @db.Decimal(10,2)
+  totalCost Decimal? @db.Decimal(12,2)
+  odometer Float?
+  station String?
+  filledAt DateTime
+  createdAt DateTime @default(now())
+  @@index([vehicleId,filledAt(sort: Desc)])
+}
+
+model Task {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields:[organizationId],references:[id],onDelete:Cascade)
+  vehicleId String?
+  vehicle Vehicle? @relation(fields:[vehicleId],references:[id],onDelete:SetNull)
+  title String
+  description String?
+  status TaskStatus @default(NEW)
+  priority Int @default(2)
+  startsAt DateTime?
+  dueAt DateTime?
+  completedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([organizationId,status])
+}
+
+model AuditLog {
+  id BigInt @id @default(autoincrement())
+  organizationId String
+  organization Organization @relation(fields:[organizationId],references:[id],onDelete:Cascade)
+  userId String?
+  user User? @relation(fields:[userId],references:[id],onDelete:SetNull)
+  action String
+  entity String
+  entityId String?
+  ip String?
+  userAgent String?
+  changes Json?
+  createdAt DateTime @default(now())
+  @@index([organizationId,createdAt(sort: Desc)])
+}
+
+model DeviceCommand {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vehicleId String
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  type String
+  payload Json?
+  status CommandStatus @default(PENDING)
+  response Json?
+  requestedById String?
+  createdAt DateTime @default(now())
+  sentAt DateTime?
+  acknowledgedAt DateTime?
+  @@index([organizationId, status, createdAt(sort: Desc)])
+  @@index([vehicleId, createdAt(sort: Desc)])
+}
+
+model CameraMedia {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vehicleId String
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  type String
+  url String
+  thumbnailUrl String?
+  durationSeconds Int?
+  capturedAt DateTime
+  metadata Json?
+  createdAt DateTime @default(now())
+  @@index([organizationId, capturedAt(sort: Desc)])
+  @@index([vehicleId, capturedAt(sort: Desc)])
+}
+
+model ConfigurationOption {
+  id String @id @default(cuid())
+  organizationId String
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  category String
+  label String
+  value String
+  active Boolean @default(true)
+  sortOrder Int @default(0)
+  metadata Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([organizationId, category, value])
+  @@index([organizationId, category, active, sortOrder])
+}

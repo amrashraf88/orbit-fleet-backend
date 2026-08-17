@@ -1,0 +1,3691 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/health": {
+      "get": {
+        "operationId": "Health_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "tags": [
+          "System"
+        ],
+        "summary": "Retrieve system",
+        "description": "Retrieve operation in the System module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/auth/login": {
+      "post": {
+        "operationId": "Auth_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              },
+              "example": {
+                "email": "admin@orbit.sa",
+                "password": "Orbit@2026"
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "email": "admin@orbit.sa",
+                    "password": "Orbit@2026"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Create / execute authentication",
+        "description": "Create / execute operation in the Authentication module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/auth/refresh": {
+      "post": {
+        "operationId": "Auth_refresh",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshDto"
+              },
+              "example": {
+                "refreshToken": "eyJ..."
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "refreshToken": "eyJ..."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Create / execute authentication",
+        "description": "Create / execute operation in the Authentication module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/auth/logout": {
+      "post": {
+        "operationId": "Auth_logout",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshDto"
+              },
+              "example": {
+                "refreshToken": "eyJ..."
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "refreshToken": "eyJ..."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Create / execute authentication",
+        "description": "Create / execute operation in the Authentication module. Organization scope is enforced from the authenticated session.",
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ]
+      }
+    },
+    "/v1/auth/me": {
+      "get": {
+        "operationId": "Auth_me",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Retrieve authentication",
+        "description": "Retrieve operation in the Authentication module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/vehicles": {
+      "get": {
+        "operationId": "Fleet_vehicles",
+        "parameters": [
+          {
+            "name": "perPage",
+            "required": false,
+            "in": "query",
+            "schema": {},
+            "example": "50"
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {},
+            "example": "1"
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "schema": {},
+            "example": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Retrieve vehicles",
+        "description": "Retrieve operation in the Vehicles module. Organization scope is enforced from the authenticated session."
+      },
+      "post": {
+        "operationId": "Fleet_createVehicle",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVehicleDto"
+              },
+              "example": {
+                "name": "سيارة توزيع 01",
+                "plateNumber": "ABC 1234",
+                "vin": "WVWZZZ1JZXW000001",
+                "group": "أسطول الرياض",
+                "make": "Toyota",
+                "model": "Hilux",
+                "year": 2025,
+                "color": "#ffffff"
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "name": "سيارة توزيع 01",
+                    "plateNumber": "ABC 1234",
+                    "vin": "WVWZZZ1JZXW000001",
+                    "group": "أسطول الرياض",
+                    "make": "Toyota",
+                    "model": "Hilux",
+                    "year": 2025,
+                    "color": "#ffffff"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Create / execute vehicles",
+        "description": "Create / execute operation in the Vehicles module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/vehicles/{id}": {
+      "get": {
+        "operationId": "Fleet_vehicle",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Retrieve vehicles",
+        "description": "Retrieve operation in the Vehicles module. Organization scope is enforced from the authenticated session."
+      },
+      "patch": {
+        "operationId": "Fleet_updateVehicle",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVehicleDto"
+              },
+              "example": {
+                "name": "سيارة توزيع 01 - محدثة",
+                "group": "أسطول جدة",
+                "driverId": "driver-id"
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "name": "سيارة توزيع 01 - محدثة",
+                    "group": "أسطول جدة",
+                    "driverId": "driver-id"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Update vehicles",
+        "description": "Update operation in the Vehicles module. Organization scope is enforced from the authenticated session."
+      },
+      "delete": {
+        "operationId": "Fleet_deleteVehicle",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Vehicles"
+        ],
+        "summary": "Delete vehicles",
+        "description": "Delete operation in the Vehicles module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/vehicles/{id}/positions": {
+      "post": {
+        "operationId": "Fleet_position",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PositionDto"
+              },
+              "example": {
+                "latitude": 24.7136,
+                "longitude": 46.6753,
+                "speed": 73,
+                "heading": 120,
+                "altitude": 620,
+                "ignition": true,
+                "accuracy": 5,
+                "recordedAt": "2026-08-17T11:00:00.000Z",
+                "raw": {
+                  "source": "tcp-adapter"
+                }
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "latitude": 24.7136,
+                    "longitude": 46.6753,
+                    "speed": 73,
+                    "heading": 120,
+                    "altitude": 620,
+                    "ignition": true,
+                    "accuracy": 5,
+                    "recordedAt": "2026-08-17T11:00:00.000Z",
+                    "raw": {
+                      "source": "tcp-adapter"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Telemetry"
+        ],
+        "summary": "Create / execute telemetry",
+        "description": "Create / execute operation in the Telemetry module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/vehicles/{id}/history": {
+      "get": {
+        "operationId": "Fleet_history",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-08-01T00:00:00.000Z"
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-08-17T23:59:59.999Z"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Telemetry"
+        ],
+        "summary": "Retrieve telemetry",
+        "description": "Retrieve operation in the Telemetry module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/drivers": {
+      "get": {
+        "operationId": "Fleet_drivers",
+        "parameters": [
+          {
+            "name": "perPage",
+            "required": false,
+            "in": "query",
+            "schema": {},
+            "example": "50"
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {},
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Drivers"
+        ],
+        "summary": "Retrieve drivers",
+        "description": "Retrieve operation in the Drivers module. Organization scope is enforced from the authenticated session."
+      },
+      "post": {
+        "operationId": "Fleet_createDriver",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDriverDto"
+              },
+              "example": {
+                "name": "خالد محمد",
+                "phone": "+966500000000",
+                "email": "driver@example.com",
+                "licenseNumber": "LIC-1001",
+                "licenseExpiresAt": "2028-12-31T00:00:00.000Z",
+                "active": true
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "name": "خالد محمد",
+                    "phone": "+966500000000",
+                    "email": "driver@example.com",
+                    "licenseNumber": "LIC-1001",
+                    "licenseExpiresAt": "2028-12-31T00:00:00.000Z",
+                    "active": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Drivers"
+        ],
+        "summary": "Create / execute drivers",
+        "description": "Create / execute operation in the Drivers module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/drivers/{id}": {
+      "patch": {
+        "operationId": "Fleet_updateDriver",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDriverDto"
+              },
+              "example": {
+                "name": "خالد محمد",
+                "phone": "+966511111111",
+                "licenseNumber": "LIC-1001",
+                "active": true
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "name": "خالد محمد",
+                    "phone": "+966511111111",
+                    "licenseNumber": "LIC-1001",
+                    "active": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Drivers"
+        ],
+        "summary": "Update drivers",
+        "description": "Update operation in the Drivers module. Organization scope is enforced from the authenticated session."
+      },
+      "delete": {
+        "operationId": "Fleet_deleteDriver",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Drivers"
+        ],
+        "summary": "Delete drivers",
+        "description": "Delete operation in the Drivers module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/geofences": {
+      "get": {
+        "operationId": "Operations_geofences",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Geofences"
+        ],
+        "summary": "Retrieve geofences",
+        "description": "Retrieve operation in the Geofences module. Organization scope is enforced from the authenticated session."
+      },
+      "post": {
+        "operationId": "Operations_createGeofence",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeofenceDto"
+              },
+              "example": {
+                "name": "مستودع الرياض",
+                "type": "circle",
+                "geometry": {
+                  "center": {
+                    "latitude": 24.7136,
+                    "longitude": 46.6753
+                  },
+                  "radiusMeters": 1000
+                },
+                "color": "#28e1da",
+                "active": true
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "name": "مستودع الرياض",
+                    "type": "circle",
+                    "geometry": {
+                      "center": {
+                        "latitude": 24.7136,
+                        "longitude": 46.6753
+                      },
+                      "radiusMeters": 1000
+                    },
+                    "color": "#28e1da",
+                    "active": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Geofences"
+        ],
+        "summary": "Create / execute geofences",
+        "description": "Create / execute operation in the Geofences module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/geofences/{id}": {
+      "patch": {
+        "operationId": "Operations_updateGeofence",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeofenceDto"
+              },
+              "example": {
+                "name": "مستودع الرياض",
+                "type": "circle",
+                "geometry": {
+                  "center": {
+                    "latitude": 24.7136,
+                    "longitude": 46.6753
+                  },
+                  "radiusMeters": 1500
+                },
+                "color": "#28e1da",
+                "active": true
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "name": "مستودع الرياض",
+                    "type": "circle",
+                    "geometry": {
+                      "center": {
+                        "latitude": 24.7136,
+                        "longitude": 46.6753
+                      },
+                      "radiusMeters": 1500
+                    },
+                    "color": "#28e1da",
+                    "active": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Geofences"
+        ],
+        "summary": "Update geofences",
+        "description": "Update operation in the Geofences module. Organization scope is enforced from the authenticated session."
+      },
+      "delete": {
+        "operationId": "Operations_removeGeofence",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Geofences"
+        ],
+        "summary": "Delete geofences",
+        "description": "Delete operation in the Geofences module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/alerts": {
+      "get": {
+        "operationId": "Operations_alerts",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "OPEN"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Alerts"
+        ],
+        "summary": "Retrieve alerts",
+        "description": "Retrieve operation in the Alerts module. Organization scope is enforced from the authenticated session."
+      },
+      "post": {
+        "operationId": "Operations_createAlert",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlertDto"
+              },
+              "example": {
+                "vehicleId": "vehicle-id",
+                "type": "OVERSPEED",
+                "title": "تجاوز السرعة",
+                "message": "تجاوزت المركبة السرعة المسموحة",
+                "severity": "WARNING",
+                "metadata": {
+                  "limit": 120,
+                  "actual": 132
+                }
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "vehicleId": "vehicle-id",
+                    "type": "OVERSPEED",
+                    "title": "تجاوز السرعة",
+                    "message": "تجاوزت المركبة السرعة المسموحة",
+                    "severity": "WARNING",
+                    "metadata": {
+                      "limit": 120,
+                      "actual": 132
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Alerts"
+        ],
+        "summary": "Create / execute alerts",
+        "description": "Create / execute operation in the Alerts module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/alerts/{id}/status": {
+      "patch": {
+        "operationId": "Operations_alertStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlertStatusDto"
+              },
+              "example": {
+                "status": "ACKNOWLEDGED"
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "status": "ACKNOWLEDGED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Alerts"
+        ],
+        "summary": "Update alerts",
+        "description": "Update operation in the Alerts module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/maintenance": {
+      "get": {
+        "operationId": "Operations_maintenance",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Maintenance"
+        ],
+        "summary": "Retrieve maintenance",
+        "description": "Retrieve operation in the Maintenance module. Organization scope is enforced from the authenticated session."
+      },
+      "post": {
+        "operationId": "Operations_createMaintenance",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaintenanceDto"
+              },
+              "example": {
+                "vehicleId": "vehicle-id",
+                "name": "تغيير الزيت",
+                "description": "زيت وفلتر",
+                "status": "UPCOMING",
+                "intervalKm": 10000,
+                "dueAt": "2026-09-01T00:00:00.000Z",
+                "dueOdometer": 50000,
+                "cost": 450
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "vehicleId": "vehicle-id",
+                    "name": "تغيير الزيت",
+                    "description": "زيت وفلتر",
+                    "status": "UPCOMING",
+                    "intervalKm": 10000,
+                    "dueAt": "2026-09-01T00:00:00.000Z",
+                    "dueOdometer": 50000,
+                    "cost": 450
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Maintenance"
+        ],
+        "summary": "Create / execute maintenance",
+        "description": "Create / execute operation in the Maintenance module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/maintenance/{id}": {
+      "patch": {
+        "operationId": "Operations_updateMaintenance",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaintenanceDto"
+              },
+              "example": {
+                "vehicleId": "vehicle-id",
+                "name": "تغيير الزيت",
+                "status": "COMPLETED",
+                "cost": 475
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "vehicleId": "vehicle-id",
+                    "name": "تغيير الزيت",
+                    "status": "COMPLETED",
+                    "cost": 475
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Maintenance"
+        ],
+        "summary": "Update maintenance",
+        "description": "Update operation in the Maintenance module. Organization scope is enforced from the authenticated session."
+      },
+      "delete": {
+        "operationId": "Operations_removeMaintenance",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Maintenance"
+        ],
+        "summary": "Delete maintenance",
+        "description": "Delete operation in the Maintenance module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/fuel": {
+      "get": {
+        "operationId": "Operations_fuel",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Fuel"
+        ],
+        "summary": "Retrieve fuel",
+        "description": "Retrieve operation in the Fuel module. Organization scope is enforced from the authenticated session."
+      },
+      "post": {
+        "operationId": "Operations_createFuel",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FuelDto"
+              },
+              "example": {
+                "vehicleId": "vehicle-id",
+                "liters": 42.5,
+                "pricePerLiter": 2.33,
+                "totalCost": 99.03,
+                "odometer": 45220,
+                "station": "محطة الرياض",
+                "filledAt": "2026-08-17T10:00:00.000Z"
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "vehicleId": "vehicle-id",
+                    "liters": 42.5,
+                    "pricePerLiter": 2.33,
+                    "totalCost": 99.03,
+                    "odometer": 45220,
+                    "station": "محطة الرياض",
+                    "filledAt": "2026-08-17T10:00:00.000Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Fuel"
+        ],
+        "summary": "Create / execute fuel",
+        "description": "Create / execute operation in the Fuel module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/fuel/{id}": {
+      "delete": {
+        "operationId": "Operations_removeFuel",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Fuel"
+        ],
+        "summary": "Delete fuel",
+        "description": "Delete operation in the Fuel module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/tasks": {
+      "get": {
+        "operationId": "Operations_tasks",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Retrieve tasks",
+        "description": "Retrieve operation in the Tasks module. Organization scope is enforced from the authenticated session."
+      },
+      "post": {
+        "operationId": "Operations_createTask",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskDto"
+              },
+              "example": {
+                "vehicleId": "vehicle-id",
+                "title": "توصيل شحنة",
+                "description": "من المستودع إلى الفرع",
+                "status": "NEW",
+                "priority": 2,
+                "startsAt": "2026-08-18T08:00:00.000Z",
+                "dueAt": "2026-08-18T12:00:00.000Z"
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "vehicleId": "vehicle-id",
+                    "title": "توصيل شحنة",
+                    "description": "من المستودع إلى الفرع",
+                    "status": "NEW",
+                    "priority": 2,
+                    "startsAt": "2026-08-18T08:00:00.000Z",
+                    "dueAt": "2026-08-18T12:00:00.000Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Create / execute tasks",
+        "description": "Create / execute operation in the Tasks module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/tasks/{id}": {
+      "patch": {
+        "operationId": "Operations_updateTask",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskDto"
+              },
+              "example": {
+                "title": "توصيل شحنة",
+                "status": "IN_PROGRESS",
+                "priority": 2
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "title": "توصيل شحنة",
+                    "status": "IN_PROGRESS",
+                    "priority": 2
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Update tasks",
+        "description": "Update operation in the Tasks module. Organization scope is enforced from the authenticated session."
+      },
+      "delete": {
+        "operationId": "Operations_removeTask",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Tasks"
+        ],
+        "summary": "Delete tasks",
+        "description": "Delete operation in the Tasks module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/users": {
+      "get": {
+        "operationId": "Operations_users",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ],
+        "summary": "Retrieve users",
+        "description": "Retrieve operation in the Users module. Organization scope is enforced from the authenticated session."
+      },
+      "post": {
+        "operationId": "Operations_createUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDto"
+              },
+              "example": {
+                "name": "مشرف العمليات",
+                "email": "ops@example.com",
+                "password": "StrongPassword123!",
+                "role": "DISPATCHER",
+                "active": true
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "name": "مشرف العمليات",
+                    "email": "ops@example.com",
+                    "password": "StrongPassword123!",
+                    "role": "DISPATCHER",
+                    "active": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create / execute users",
+        "description": "Create / execute operation in the Users module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/users/{id}": {
+      "delete": {
+        "operationId": "Operations_deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ],
+        "summary": "Delete users",
+        "description": "Delete operation in the Users module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/audit-logs": {
+      "get": {
+        "operationId": "Operations_audit",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Audit"
+        ],
+        "summary": "Retrieve audit",
+        "description": "Retrieve operation in the Audit module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/commands": {
+      "get": {
+        "operationId": "Operations_commands",
+        "parameters": [
+          {
+            "name": "vehicleId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Device Commands"
+        ],
+        "summary": "Retrieve device commands",
+        "description": "Retrieve operation in the Device Commands module. Organization scope is enforced from the authenticated session."
+      },
+      "post": {
+        "operationId": "Operations_createCommand",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandDto"
+              },
+              "example": {
+                "vehicleId": "vehicle-id",
+                "type": "REQUEST_POSITION",
+                "payload": {
+                  "reason": "manual_refresh"
+                }
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "vehicleId": "vehicle-id",
+                    "type": "REQUEST_POSITION",
+                    "payload": {
+                      "reason": "manual_refresh"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Device Commands"
+        ],
+        "summary": "Create / execute device commands",
+        "description": "Create / execute operation in the Device Commands module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/commands/{id}/status": {
+      "patch": {
+        "operationId": "Operations_commandStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommandStatusDto"
+              },
+              "example": {
+                "status": "ACKNOWLEDGED",
+                "response": {
+                  "message": "OK"
+                }
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "status": "ACKNOWLEDGED",
+                    "response": {
+                      "message": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Device Commands"
+        ],
+        "summary": "Update device commands",
+        "description": "Update operation in the Device Commands module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/cameras": {
+      "get": {
+        "operationId": "Operations_cameras",
+        "parameters": [
+          {
+            "name": "vehicleId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Cameras"
+        ],
+        "summary": "Retrieve cameras",
+        "description": "Retrieve operation in the Cameras module. Organization scope is enforced from the authenticated session."
+      },
+      "post": {
+        "operationId": "Operations_createCamera",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CameraMediaDto"
+              },
+              "example": {
+                "vehicleId": "vehicle-id",
+                "type": "front_snapshot",
+                "url": "https://cdn.example.com/media/image.jpg",
+                "thumbnailUrl": "https://cdn.example.com/media/thumb.jpg",
+                "capturedAt": "2026-08-17T10:00:00.000Z",
+                "metadata": {
+                  "cameraPosition": "front"
+                }
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "vehicleId": "vehicle-id",
+                    "type": "front_snapshot",
+                    "url": "https://cdn.example.com/media/image.jpg",
+                    "thumbnailUrl": "https://cdn.example.com/media/thumb.jpg",
+                    "capturedAt": "2026-08-17T10:00:00.000Z",
+                    "metadata": {
+                      "cameraPosition": "front"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Cameras"
+        ],
+        "summary": "Create / execute cameras",
+        "description": "Create / execute operation in the Cameras module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/cameras/{id}": {
+      "delete": {
+        "operationId": "Operations_deleteCamera",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Cameras"
+        ],
+        "summary": "Delete cameras",
+        "description": "Delete operation in the Cameras module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/configuration-options": {
+      "get": {
+        "operationId": "Operations_configuration",
+        "parameters": [
+          {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includeInactive",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Retrieve configuration",
+        "description": "Retrieve operation in the Configuration module. Organization scope is enforced from the authenticated session."
+      },
+      "post": {
+        "operationId": "Operations_createConfiguration",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfigurationOptionDto"
+              },
+              "example": {
+                "category": "vehicle_group",
+                "label": "أسطول الدمام",
+                "value": "dammam_fleet",
+                "active": true,
+                "sortOrder": 10
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "category": "vehicle_group",
+                    "label": "أسطول الدمام",
+                    "value": "dammam_fleet",
+                    "active": true,
+                    "sortOrder": 10
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Create / execute configuration",
+        "description": "Create / execute operation in the Configuration module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/configuration-options/{id}": {
+      "patch": {
+        "operationId": "Operations_updateConfiguration",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfigurationOptionDto"
+              },
+              "example": {
+                "category": "vehicle_group",
+                "label": "أسطول الدمام المحدث",
+                "value": "dammam_fleet",
+                "active": true,
+                "sortOrder": 10
+              },
+              "examples": {
+                "complete": {
+                  "summary": "Complete request example",
+                  "value": {
+                    "category": "vehicle_group",
+                    "label": "أسطول الدمام المحدث",
+                    "value": "dammam_fleet",
+                    "active": true,
+                    "sortOrder": 10
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Update configuration",
+        "description": "Update operation in the Configuration module. Organization scope is enforced from the authenticated session."
+      },
+      "delete": {
+        "operationId": "Operations_deleteConfiguration",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Delete configuration",
+        "description": "Delete operation in the Configuration module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/reports/dashboard": {
+      "get": {
+        "operationId": "Reports_dashboard",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Retrieve reports",
+        "description": "Retrieve operation in the Reports module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/reports/utilization": {
+      "get": {
+        "operationId": "Reports_utilization",
+        "parameters": [
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-08-01T00:00:00.000Z"
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-08-17T23:59:59.999Z"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Retrieve reports",
+        "description": "Retrieve operation in the Reports module. Organization scope is enforced from the authenticated session."
+      }
+    },
+    "/v1/reports/vehicles/{id}/route": {
+      "get": {
+        "operationId": "Reports_route",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-08-01T00:00:00.000Z"
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-08-17T23:59:59.999Z"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "Validation failed"
+          },
+          "401": {
+            "description": "Missing, invalid or expired authentication"
+          },
+          "403": {
+            "description": "Authenticated role is not permitted"
+          },
+          "404": {
+            "description": "Resource not found in the current organization"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "cookieAuth": []
+          }
+        ],
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Retrieve reports",
+        "description": "Retrieve operation in the Reports module. Organization scope is enforced from the authenticated session."
+      }
+    }
+  },
+  "info": {
+    "title": "ORBIT Fleet API",
+    "description": "Complete fleet operations API: authentication, vehicles, TCP-normalized telemetry, drivers, geofences, alerts, maintenance, fuel, tasks, device commands, cameras, configuration, users, audit and reports.",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "System",
+      "description": "Service health and operational status"
+    },
+    {
+      "name": "Authentication",
+      "description": "Login, session refresh, logout and current user"
+    },
+    {
+      "name": "Vehicles",
+      "description": "Vehicle master data and assignment"
+    },
+    {
+      "name": "Telemetry",
+      "description": "Normalized GPS positions and route history"
+    },
+    {
+      "name": "Drivers",
+      "description": "Driver records and vehicle relationships"
+    },
+    {
+      "name": "Geofences",
+      "description": "Geographic zones and geometry"
+    },
+    {
+      "name": "Alerts",
+      "description": "Fleet alerts, acknowledgement and resolution"
+    },
+    {
+      "name": "Maintenance",
+      "description": "Scheduled and completed maintenance"
+    },
+    {
+      "name": "Fuel",
+      "description": "Fuel purchases and consumption records"
+    },
+    {
+      "name": "Tasks",
+      "description": "Fleet jobs and delivery tasks"
+    },
+    {
+      "name": "Device Commands",
+      "description": "Commands queued for GPS devices"
+    },
+    {
+      "name": "Cameras",
+      "description": "Vehicle camera media metadata"
+    },
+    {
+      "name": "Configuration",
+      "description": "Organization dropdown values and system configuration"
+    },
+    {
+      "name": "Users",
+      "description": "Organization users and roles"
+    },
+    {
+      "name": "Audit",
+      "description": "Immutable administrative activity history"
+    },
+    {
+      "name": "Reports",
+      "description": "Dashboard, utilization and route analytics"
+    }
+  ],
+  "servers": [
+    {
+      "url": "http://localhost:4000",
+      "description": "Local development"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http",
+        "description": "Paste the access token returned by POST /v1/auth/login"
+      },
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "access_token",
+        "description": "HttpOnly browser session cookie"
+      }
+    },
+    "schemas": {
+      "LoginDto": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "admin@orbit.sa",
+            "description": "User email address"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "minLength": 8,
+            "example": "Orbit@2026",
+            "description": "Account password"
+          }
+        }
+      },
+      "RefreshDto": {
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1Ni...",
+            "description": "Refresh JWT; optional when the HttpOnly refresh cookie exists"
+          }
+        }
+      },
+      "CreateVehicleDto": {
+        "type": "object",
+        "required": [
+          "name",
+          "plateNumber"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "سيارة توزيع 01"
+          },
+          "plateNumber": {
+            "type": "string",
+            "example": "ABC 1234"
+          },
+          "vin": {
+            "type": "string",
+            "example": "WVWZZZ1JZXW000001"
+          },
+          "group": {
+            "type": "string",
+            "example": "أسطول الرياض"
+          },
+          "make": {
+            "type": "string",
+            "example": "Toyota"
+          },
+          "model": {
+            "type": "string",
+            "example": "Hilux"
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 1980,
+            "maximum": 2100,
+            "example": 2025
+          },
+          "color": {
+            "type": "string",
+            "example": "#ffffff"
+          },
+          "driverId": {
+            "type": "string",
+            "example": "driver-id"
+          }
+        }
+      },
+      "UpdateVehicleDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "سيارة توزيع 01 - محدثة"
+          },
+          "plateNumber": {
+            "type": "string",
+            "example": "ABC 1234"
+          },
+          "vin": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string",
+            "example": "أسطول جدة"
+          },
+          "make": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 1980,
+            "maximum": 2100
+          },
+          "color": {
+            "type": "string"
+          },
+          "driverId": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "PositionDto": {
+        "type": "object",
+        "required": [
+          "latitude",
+          "longitude",
+          "speed",
+          "heading",
+          "ignition",
+          "recordedAt"
+        ],
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "format": "double",
+            "minimum": -90,
+            "maximum": 90,
+            "example": 24.7136
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double",
+            "minimum": -180,
+            "maximum": 180,
+            "example": 46.6753
+          },
+          "speed": {
+            "type": "number",
+            "minimum": 0,
+            "example": 73,
+            "description": "Kilometers per hour"
+          },
+          "heading": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 360,
+            "example": 120
+          },
+          "altitude": {
+            "type": "number",
+            "example": 620
+          },
+          "ignition": {
+            "type": "boolean",
+            "example": true
+          },
+          "accuracy": {
+            "type": "number",
+            "minimum": 0,
+            "example": 5
+          },
+          "recordedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-08-17T11:00:00.000Z"
+          },
+          "raw": {
+            "type": "object",
+            "additionalProperties": true,
+            "example": {
+              "source": "tcp-adapter"
+            }
+          }
+        }
+      },
+      "CreateDriverDto": {
+        "type": "object",
+        "required": [
+          "name",
+          "licenseNumber"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "خالد محمد"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+966500000000"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "driver@example.com"
+          },
+          "licenseNumber": {
+            "type": "string",
+            "example": "LIC-1001"
+          },
+          "licenseExpiresAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2028-12-31T00:00:00.000Z"
+          },
+          "active": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "UpdateDriverDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "licenseNumber": {
+            "type": "string"
+          },
+          "licenseExpiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "active": {
+            "type": "boolean"
+          }
+        }
+      },
+      "GeofenceDto": {
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "geometry"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "مستودع الرياض"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "circle",
+              "polygon"
+            ],
+            "example": "circle"
+          },
+          "geometry": {
+            "type": "object",
+            "additionalProperties": true,
+            "example": {
+              "center": {
+                "latitude": 24.7136,
+                "longitude": 46.6753
+              },
+              "radiusMeters": 1000
+            }
+          },
+          "color": {
+            "type": "string",
+            "default": "#28e1da"
+          },
+          "active": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "AlertDto": {
+        "type": "object",
+        "required": [
+          "type",
+          "title",
+          "message"
+        ],
+        "properties": {
+          "vehicleId": {
+            "type": "string",
+            "example": "vehicle-id"
+          },
+          "type": {
+            "type": "string",
+            "example": "OVERSPEED"
+          },
+          "title": {
+            "type": "string",
+            "example": "تجاوز السرعة"
+          },
+          "message": {
+            "type": "string",
+            "example": "تجاوزت المركبة السرعة المسموحة"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "INFO",
+              "WARNING",
+              "CRITICAL"
+            ],
+            "default": "INFO"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true,
+            "example": {
+              "limit": 120,
+              "actual": 132
+            }
+          }
+        }
+      },
+      "AlertStatusDto": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "ACKNOWLEDGED",
+              "RESOLVED"
+            ],
+            "example": "ACKNOWLEDGED"
+          }
+        }
+      },
+      "MaintenanceDto": {
+        "type": "object",
+        "required": [
+          "vehicleId",
+          "name"
+        ],
+        "properties": {
+          "vehicleId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "تغيير الزيت"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "UPCOMING",
+              "DUE",
+              "OVERDUE",
+              "COMPLETED"
+            ]
+          },
+          "intervalKm": {
+            "type": "number",
+            "minimum": 0
+          },
+          "intervalHours": {
+            "type": "number",
+            "minimum": 0
+          },
+          "dueAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dueOdometer": {
+            "type": "number",
+            "minimum": 0
+          },
+          "cost": {
+            "type": "number",
+            "minimum": 0,
+            "example": 450
+          }
+        }
+      },
+      "FuelDto": {
+        "type": "object",
+        "required": [
+          "vehicleId",
+          "liters",
+          "filledAt"
+        ],
+        "properties": {
+          "vehicleId": {
+            "type": "string"
+          },
+          "liters": {
+            "type": "number",
+            "minimum": 0.01,
+            "example": 42.5
+          },
+          "pricePerLiter": {
+            "type": "number",
+            "minimum": 0
+          },
+          "totalCost": {
+            "type": "number",
+            "minimum": 0
+          },
+          "odometer": {
+            "type": "number",
+            "minimum": 0
+          },
+          "station": {
+            "type": "string",
+            "example": "محطة الرياض"
+          },
+          "filledAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "TaskDto": {
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "توصيل شحنة"
+          },
+          "description": {
+            "type": "string"
+          },
+          "vehicleId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "NEW",
+              "IN_PROGRESS",
+              "COMPLETED",
+              "FAILED",
+              "CANCELLED"
+            ]
+          },
+          "priority": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4,
+            "default": 2
+          },
+          "startsAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dueAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "UserDto": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "password",
+          "role"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "مشرف العمليات"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "ops@example.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "minLength": 8,
+            "example": "StrongPassword123!"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "SUPER_ADMIN",
+              "ADMIN",
+              "DISPATCHER",
+              "MANAGER",
+              "VIEWER"
+            ]
+          },
+          "active": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "CommandDto": {
+        "type": "object",
+        "required": [
+          "vehicleId",
+          "type"
+        ],
+        "properties": {
+          "vehicleId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "example": "REQUEST_POSITION"
+          },
+          "payload": {
+            "type": "object",
+            "additionalProperties": true,
+            "example": {
+              "reason": "manual_refresh"
+            }
+          }
+        }
+      },
+      "CommandStatusDto": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "SENT",
+              "ACKNOWLEDGED",
+              "FAILED",
+              "CANCELLED"
+            ]
+          },
+          "response": {
+            "type": "object",
+            "additionalProperties": true,
+            "example": {
+              "message": "OK"
+            }
+          }
+        }
+      },
+      "CameraMediaDto": {
+        "type": "object",
+        "required": [
+          "vehicleId",
+          "type",
+          "url",
+          "capturedAt"
+        ],
+        "properties": {
+          "vehicleId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "example": "front_snapshot"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "thumbnailUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "durationSeconds": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "capturedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "ConfigurationOptionDto": {
+        "type": "object",
+        "required": [
+          "category",
+          "label",
+          "value"
+        ],
+        "properties": {
+          "category": {
+            "type": "string",
+            "example": "vehicle_group"
+          },
+          "label": {
+            "type": "string",
+            "example": "أسطول الدمام"
+          },
+          "value": {
+            "type": "string",
+            "example": "dammam_fleet"
+          },
+          "active": {
+            "type": "boolean",
+            "default": true
+          },
+          "sortOrder": {
+            "type": "integer",
+            "default": 0
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      }
+    }
+  }
+}
